@@ -21,7 +21,7 @@ async function bootstrap() {
 
   await app.listen(PORT || 3000);
 
-  console.log('MONGO URI -----> ', configSerive.get('MONGODB_URI_LOCAL'));
+  console.log('MONGO URI -----> ', configSerive.get('MONGODB_URI'));
 
   console.log(`Consumer Application is running on: ${await app.getUrl()}`);
 }
