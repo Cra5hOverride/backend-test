@@ -1,23 +1,12 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { UsersService } from './service/users.service';
 import { UsersController } from './controller/users.controller';
-import { User, UserSchema } from './schemas/user.schema';
+import { TypegooseModule } from "nestjs-typegoose";
+import { User } from './model/user.model';
 
 @Module({
   imports:[
-    MongooseModule.forFeatureAsync([
-      {
-        name: User.name,
-        useFactory: () => {
-          const schema = UserSchema;
-          schema.plugin(require('mongoose-delete'), {
-            overrideMethods: true,
-          });
-          return schema;
-        },
-      },
-    ]),
+    TypegooseModule.forFeature([User]),
   ],
   controllers: [UsersController],
   providers: [UsersService],

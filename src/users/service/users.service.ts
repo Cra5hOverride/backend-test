@@ -1,16 +1,17 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
-import { Model } from 'mongoose-delete';
-import { User, UserDocument } from '../schemas/user.schema';
-import { InjectModel } from '@nestjs/mongoose';
+import { InjectModel } from "nestjs-typegoose";
+import { ReturnModelType } from "@typegoose/typegoose";
+import { User } from '../model/user.model';
 import * as bcrypt from 'bcrypt';
+
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectModel(User.name)
-    private userModel: Model<UserDocument>,
+    @InjectModel(User)
+    private readonly userModel: ReturnModelType<typeof User>,
 
   ) {}
 
@@ -58,11 +59,11 @@ export class UsersService {
 
   async remove(id: string) {
     const user = await this.userModel.findById(id);
-    return  user.delete();
+    return  user.deleteOne();
   }
 
   async checkDuplicateEmail(email: string) {
-    const user = await this.userModel.findOneWithDeleted({
+    const user = await this.userModel.findOne({
       email: email,
     });
 
@@ -73,7 +74,7 @@ export class UsersService {
   }
 
   async checkDuplicateUsername(username: string) {
-    const user = await this.userModel.findOneWithDeleted({
+    const user = await this.userModel.findOne({
       username: username,
     });
 

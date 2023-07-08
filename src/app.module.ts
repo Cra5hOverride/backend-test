@@ -4,8 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { config } from './config/config';
 import { UsersModule } from './users/users.module';
-import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
+import { TypegooseModule } from "nestjs-typegoose";
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { AuthModule } from './auth/auth.module';
       load: [config],
       envFilePath: ['.env.development', '.env'],
     }),
-    MongooseModule.forRootAsync({
+    TypegooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>('MONGODB_URI_LOCAL'),
