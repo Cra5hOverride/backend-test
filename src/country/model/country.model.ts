@@ -4,9 +4,9 @@ import { prop } from "@typegoose/typegoose";
 export class Country {
 
   @prop({ unique: true })
-  name: string;
+  public name: string;
 
   @prop({ unique: true })
-  code: string;
+  public code: string;
 }
 

@@ -5,19 +5,19 @@ import { Country } from "src/country/model/country.model";
 export class User {
 
   @prop({ unique: true })
-  username: string;
+  public username: string;
 
   @prop()
-  password: string;
+  public password: string;
 
   @prop()
-  firstname: string;
+  public firstname: string;
 
   @prop()
-  lastname: string;
+  public lastname: string;
 
   @prop({ unique: true })
-  email: string;
+  public email: string;
 
   @prop({ ref: () => Country })
   public country?: Ref<Country>;
