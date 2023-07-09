@@ -6,6 +6,7 @@ import { config } from './config/config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { TypegooseModule } from "nestjs-typegoose";
+import { CountryModule } from './country/country.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TypegooseModule } from "nestjs-typegoose";
     }),
     AuthModule,
     UsersModule,
+    CountryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

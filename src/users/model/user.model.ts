@@ -1,4 +1,5 @@
-import { prop } from "@typegoose/typegoose";
+import { prop, Ref } from "@typegoose/typegoose";
+import { Country } from "src/country/model/country.model";
 
 
 export class User {
@@ -17,6 +18,9 @@ export class User {
 
   @prop({ unique: true })
   email: string;
+
+  @prop({ ref: () => Country })
+  public country?: Ref<Country>;
 
 }
 

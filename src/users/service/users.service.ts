@@ -12,7 +12,6 @@ export class UsersService {
   constructor(
     @InjectModel(User)
     private readonly userModel: ReturnModelType<typeof User>,
-
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -39,11 +38,11 @@ export class UsersService {
   }
 
   async findAll() {
-    return await this.userModel.find();
+    return await this.userModel.find().populate('country');
   }
 
   async findOne(id: string) {
-    return await this.userModel.findById(id, { password: 0 });
+    return (await this.userModel.findById(id, { password: 0 })).populate('country');
   }
 
   async findByUsername(username: string) {

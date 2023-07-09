@@ -31,4 +31,8 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
+  @ApiProperty()
+  @IsNotEmpty()
+  country: string;
+
 }
